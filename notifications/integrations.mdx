@@ -5,13 +5,13 @@ description: "Set up Email, SMS, Slack, Webhook, and other notification channels
 
 ## Available Integrations
 
-StatusPage.one lets you attach notification channels directly to a monitor. Each integration type has a slightly different setup form depending on the destination, credential, or endpoint it needs.
+GetMonitor lets you attach notification channels directly to a monitor. Each integration type has a slightly different setup form depending on the destination, credential, or endpoint it needs.
 
 ## Email
 
 Email integrations send alerts to a single inbox for the selected monitor.
 
-![Email integration form](/images/product/console.statuspageone.com_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_email.png)
+![Email integration form](/images/product/console.getmonitor.io_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_email.png)
 
 **What you need:** An `Email Address` that should receive monitor alerts.
 
@@ -26,7 +26,7 @@ Email integrations send alerts to a single inbox for the selected monitor.
 
 SMS integrations send alert messages to a phone number in international format.
 
-![SMS integration form](/images/product/console.statuspageone.com_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_sms.png)
+![SMS integration form](/images/product/console.getmonitor.io_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_sms.png)
 
 **What you need:** A `Phone Number` with country code, such as `+1234567890`.
 
@@ -41,7 +41,7 @@ SMS integrations send alert messages to a phone number in international format.
 
 Slack integrations send monitor alerts to a Slack webhook, with an optional channel override.
 
-![Slack integration form](/images/product/console.statuspageone.com_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_slack.png)
+![Slack integration form](/images/product/console.getmonitor.io_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_slack.png)
 
 **What you need:**
 - A `Slack Webhook URL`
@@ -49,7 +49,7 @@ Slack integrations send monitor alerts to a Slack webhook, with an optional chan
 
 **Setup:**
 1. Create an incoming webhook in Slack.
-2. Open the monitor's Alerts screen in StatusPage.one.
+2. Open the monitor's Alerts screen in GetMonitor.
 3. Click `Add Integration`.
 4. Select `Slack`.
 5. Paste the Slack webhook URL.
@@ -60,7 +60,7 @@ Slack integrations send monitor alerts to a Slack webhook, with an optional chan
 
 Discord integrations deliver monitor alerts to a Discord channel through a webhook URL.
 
-![Discord integration form](/images/product/console.statuspageone.com_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_discord.png)
+![Discord integration form](/images/product/console.getmonitor.io_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_discord.png)
 
 **What you need:** A `Discord Webhook URL`.
 
@@ -76,7 +76,7 @@ Discord integrations deliver monitor alerts to a Discord channel through a webho
 
 Telegram integrations send monitor alerts through a Telegram bot to a specific chat.
 
-![Telegram integration form](/images/product/console.statuspageone.com_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_telegram.png)
+![Telegram integration form](/images/product/console.getmonitor.io_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_telegram.png)
 
 **What you need:**
 - A Telegram `Bot Token`
@@ -95,7 +95,7 @@ Telegram integrations send monitor alerts through a Telegram bot to a specific c
 
 Webhook integrations send HTTP requests to your own endpoint when the monitor triggers an alert notification.
 
-![Webhook integration form](/images/product/console.statuspageone.com_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_webhook.png)
+![Webhook integration form](/images/product/console.getmonitor.io_en-US_org_fvd0bqahqfj5nnf2d4m5n373_monitors_jpbbnit76o9gx6ifthw5oxld_alerts_new_webhook.png)
 
 **What you need:**
 - A `Webhook URL`
@@ -117,7 +117,7 @@ Webhook notifications are sent with `Content-Type: application/json`. The defaul
 
 ### Webhook Payload
 
-This is the exact JSON payload shape StatusPage.one sends today:
+This is the exact JSON payload shape GetMonitor sends today:
 
 ```json
 {
