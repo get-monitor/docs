@@ -1,1 +1,1039 @@
-{"openapi":"3.0.0","paths":{"/api/v1/status-pages":{"get":{"operationId":"StatusPageController_getStatusPage_v1","parameters":[{"name":"slug","required":false,"in":"query","description":"Status page slug (domain field)","schema":{"example":"mycompany","type":"string"}},{"name":"domain","required":false,"in":"query","description":"Full domain (custom or *.statuspage.one)","schema":{"example":"status.mycompany.com","type":"string"}}],"responses":{"200":{"description":""}},"summary":"Resolve status page by slug or domain","tags":["status-pages"]}},"/api/v1/status-pages/{id}/status":{"get":{"operationId":"StatusPageController_getLatestStatus_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"summary":"Get current aggregate status of a status page","tags":["status-pages"]}},"/api/v1/status-pages/{id}":{"patch":{"operationId":"StatusPageController_update_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateStatusPageDto"}}}},"responses":{"200":{"description":""}},"security":[{"bearer":[]}],"summary":"Update status page settings","tags":["status-pages"]}},"/api/v1/status-pages/{id}/customization":{"get":{"operationId":"CustomizationController_getCustomization_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"summary":"Get customization for a status page","tags":["status-pages"]},"patch":{"operationId":"CustomizationController_updateCustomization_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateCustomizationDto"}}}},"responses":{"200":{"description":""}},"security":[{"bearer":[]}],"summary":"Update customization for a status page","tags":["status-pages"]},"delete":{"operationId":"CustomizationController_resetCustomization_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"security":[{"bearer":[]}],"summary":"Reset customization to defaults","tags":["status-pages"]}},"/api/v1/status-pages/{id}/monitors":{"get":{"operationId":"ComponentController_getMonitors_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"summary":"Get monitors for a status page","tags":["status-pages"]}},"/api/v1/status-pages/{id}/components":{"get":{"operationId":"ComponentController_getComponentTree_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"days","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":""}},"summary":"Get component tree with uptime data","tags":["status-pages"]}},"/api/v1/status-pages/{id}/monitors/{monitorId}/aggregations":{"get":{"operationId":"ComponentController_getMonitorAggregations_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"monitorId","required":true,"in":"path","schema":{"type":"string"}},{"name":"date","required":true,"in":"query","schema":{}}],"responses":{"200":{"description":""}},"summary":"Get hourly aggregations for a monitor","tags":["status-pages"]}},"/api/v1/status-pages/{id}/incidents":{"get":{"operationId":"IncidentController_getIncidents_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"limit","required":false,"in":"query","description":"Results per page (default 20, max 100)","schema":{"type":"number"}},{"name":"page","required":false,"in":"query","description":"Page number (default 1)","schema":{"type":"number"}},{"name":"status","required":false,"in":"query","description":"Filter by status (e.g. investigating)","schema":{}}],"responses":{"200":{"description":""}},"summary":"Get incidents for a status page","tags":["status-pages"]}},"/api/v1/status-pages/{id}/incidents/{incidentId}":{"get":{"operationId":"IncidentController_getIncidentById_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"incidentId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"summary":"Get a specific incident by ID","tags":["status-pages"]}},"/api/v1/status-pages/{id}/maintenance":{"get":{"operationId":"MaintenanceController_getMaintenance_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"limit","required":false,"in":"query","schema":{"type":"number"}},{"name":"page","required":false,"in":"query","schema":{"type":"number"}},{"name":"endDate","required":false,"in":"query","description":"ISO 8601 datetime — enables date-range mode (requires startDate)","schema":{}},{"name":"startDate","required":false,"in":"query","description":"ISO 8601 datetime — enables date-range mode (requires endDate)","schema":{}},{"name":"status","required":false,"in":"query","description":"Filter by status (scheduled | in_progress | completed | cancelled)","schema":{}}],"responses":{"200":{"description":""}},"summary":"Get maintenance windows for a status page","tags":["status-pages"]}},"/api/v1/status-pages/{id}/maintenance/{maintenanceId}":{"get":{"operationId":"MaintenanceController_getMaintenanceById_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"maintenanceId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"summary":"Get a specific maintenance event by ID","tags":["status-pages"]}},"/api/v1/status-pages/{id}/updates":{"get":{"operationId":"StatusUpdateController_getStatusUpdates_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"limit","required":false,"in":"query","schema":{}},{"name":"page","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":""}},"summary":"Get status updates for a status page","tags":["status-pages"]}},"/api/v1/status-pages/{id}/subscriptions":{"post":{"operationId":"SubscriptionController_createSubscription_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateSubscriptionDto"}}}},"responses":{"201":{"description":""}},"summary":"Subscribe to status page notifications","tags":["subscriptions"]}},"/api/v1/subscriptions/verifications":{"post":{"operationId":"SubscriptionController_verifyToken_v1","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/TokenDto"}}}},"responses":{"201":{"description":""}},"summary":"Verify subscription token","tags":["subscriptions"]}},"/api/v1/subscriptions/confirmations":{"post":{"operationId":"SubscriptionController_confirmSubscription_v1","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/TokenDto"}}}},"responses":{"201":{"description":""}},"summary":"Confirm subscription","tags":["subscriptions"]}},"/api/v1/organizations/{orgId}/subscription/usage":{"get":{"operationId":"SubscriptionController_getUsage_v1","parameters":[{"name":"orgId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":""}},"security":[{"bearer":[]}],"summary":"Get subscription usage for an organization","tags":["subscriptions"]}},"/api/v1/subscriptions/unsubscribe":{"post":{"operationId":"SubscriptionController_unsubscribe_v1","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UnsubscribeDto"}}}},"responses":{"201":{"description":""}},"summary":"Unsubscribe from status page notifications","tags":["subscriptions"]}},"/api/v1/status-pages/{id}/badge":{"get":{"operationId":"BadgeController_getBadge_v1","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"preview","required":false,"in":"query","schema":{"enum":["operational","unavailable","investigation"],"type":"string"}},{"name":"textInvestigation","required":false,"in":"query","schema":{}},{"name":"textUnavailable","required":false,"in":"query","schema":{}},{"name":"textOperational","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":""}},"summary":"Get badge data for a status page","tags":["status-pages"]}}},"info":{"title":"GetMonitor API","description":"Status Pages bounded context","version":"1.0","contact":{}},"tags":[],"servers":[],"components":{"securitySchemes":{"bearer":{"scheme":"bearer","bearerFormat":"JWT","type":"http"}},"schemas":{"UpdateStatusPageDto":{"type":"object","properties":{"name":{"type":"string","example":"My Status Page"},"description":{"type":"string"},"logoUrl":{"type":"string"},"visibility":{"type":"string","enum":["public","private"]}}},"UpdateCustomizationDto":{"type":"object","properties":{"primaryColor":{"type":"string"},"accentColor":{"type":"string"},"backgroundColor":{"type":"string"},"foregroundColor":{"type":"string"},"primaryForegroundColor":{"type":"string"},"cardColor":{"type":"string"},"cardForegroundColor":{"type":"string"},"mutedColor":{"type":"string"},"mutedForegroundColor":{"type":"string"},"borderColor":{"type":"string"},"textColor":{"type":"string"},"useDarkTheme":{"type":"boolean"},"showSubscriptionButton":{"type":"boolean"},"showRecentUpdatesSection":{"type":"boolean"},"hideHeaderName":{"type":"boolean"},"shadowStyle":{"type":"string"},"borderRadiusStyle":{"type":"string"},"defaultLanguage":{"type":"string"},"headerDisplayName":{"type":"string"},"customCss":{"type":"string"},"customHeaderHtml":{"type":"string"},"customFooterHtml":{"type":"string"}}}, "CreateSubscriptionDto":{"type":"object","properties":{"email":{"type":"string","description":"Email address for notifications"},"slackWebhookUrl":{"type":"string","description":"Slack webhook URL"},"subscriptionType":{"type":"string","enum":["all","specific"]},"monitorIds":{"description":"Monitor IDs for specific subscriptions","type":"array","items":{"type":"string"}}},"required":["subscriptionType"]},"TokenDto":{"type":"object","properties":{"token":{"type":"string","description":"Confirmation token received via email","example":"uuid-v4-token"}},"required":["token"]},"UnsubscribeDto":{"type":"object","properties":{"token":{"type":"string","description":"Unsubscribe token received via email"}},"required":["token"]}}}}
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GetMonitor API",
+    "description": "Status Pages bounded context",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "paths": {
+    "/api/v1/status-pages": {
+      "get": {
+        "operationId": "StatusPageController_getStatusPage_v1",
+        "summary": "Resolve status page by slug or domain",
+        "tags": ["status-pages"],
+        "parameters": [
+          {
+            "name": "slug",
+            "required": false,
+            "in": "query",
+            "description": "Status page slug (domain field)",
+            "schema": { "type": "string", "example": "mycompany" }
+          },
+          {
+            "name": "domain",
+            "required": false,
+            "in": "query",
+            "description": "Full domain (custom or *.statuspage.one)",
+            "schema": { "type": "string", "example": "status.mycompany.com" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status page resolved",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusPageResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/status": {
+      "get": {
+        "operationId": "StatusPageController_getLatestStatus_v1",
+        "summary": "Get current aggregate status of a status page",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current aggregate status",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusPageStatusResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}": {
+      "patch": {
+        "operationId": "StatusPageController_update_v1",
+        "summary": "Update status page settings",
+        "tags": ["status-pages"],
+        "security": [{ "bearer": [] }],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateStatusPageDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/api/v1/status-pages/{id}/customization": {
+      "get": {
+        "operationId": "CustomizationController_getCustomization_v1",
+        "summary": "Get customization for a status page",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status page customization",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CustomizationResponse" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CustomizationController_updateCustomization_v1",
+        "summary": "Update customization for a status page",
+        "tags": ["status-pages"],
+        "security": [{ "bearer": [] }],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateCustomizationDto" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "" } }
+      },
+      "delete": {
+        "operationId": "CustomizationController_resetCustomization_v1",
+        "summary": "Reset customization to defaults",
+        "tags": ["status-pages"],
+        "security": [{ "bearer": [] }],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "" } }
+      }
+    },
+    "/api/v1/status-pages/{id}/monitors": {
+      "get": {
+        "operationId": "ComponentController_getMonitors_v1",
+        "summary": "Get monitors for a status page",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of monitors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/MonitorSummary" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/components": {
+      "get": {
+        "operationId": "ComponentController_getComponentTree_v1",
+        "summary": "Get component tree with uptime data",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          {
+            "name": "days",
+            "required": false,
+            "in": "query",
+            "description": "Number of days of history to include (default: 60)",
+            "schema": { "type": "integer", "default": 60, "example": 30 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Component tree with uptime history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ComponentTreeItem" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/monitors/{monitorId}/aggregations": {
+      "get": {
+        "operationId": "ComponentController_getMonitorAggregations_v1",
+        "summary": "Get hourly aggregations for a monitor",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          { "name": "monitorId", "required": true, "in": "path", "schema": { "type": "string" } },
+          {
+            "name": "date",
+            "required": true,
+            "in": "query",
+            "description": "ISO date (YYYY-MM-DD)",
+            "schema": { "type": "string", "example": "2024-01-15" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hourly aggregations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/AggregationHour" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/incidents": {
+      "get": {
+        "operationId": "IncidentController_getIncidents_v1",
+        "summary": "Get incidents for a status page",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Results per page (default 20, max 100)",
+            "schema": { "type": "integer", "default": 20, "maximum": 100 }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (default 1)",
+            "schema": { "type": "integer", "default": 1 }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by status",
+            "schema": {
+              "type": "string",
+              "enum": ["investigating", "identified", "monitoring", "resolved"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of incidents",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/IncidentListResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/incidents/{incidentId}": {
+      "get": {
+        "operationId": "IncidentController_getIncidentById_v1",
+        "summary": "Get a specific incident by ID",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          { "name": "incidentId", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Incident details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/IncidentItem" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/maintenance": {
+      "get": {
+        "operationId": "MaintenanceController_getMaintenance_v1",
+        "summary": "Get maintenance windows for a status page",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "integer", "default": 20 }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "integer", "default": 1 }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "description": "ISO 8601 datetime — enables date-range mode (requires endDate)",
+            "schema": { "type": "string", "example": "2024-01-01T00:00:00Z" }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "description": "ISO 8601 datetime — enables date-range mode (requires startDate)",
+            "schema": { "type": "string", "example": "2024-01-31T23:59:59Z" }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by status",
+            "schema": {
+              "type": "string",
+              "enum": ["scheduled", "in_progress", "completed", "cancelled"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Maintenance windows. Returns a paginated object in normal mode; a bare array when both startDate and endDate are provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/MaintenanceListResponse" },
+                    {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/MaintenanceItem" }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/maintenance/{maintenanceId}": {
+      "get": {
+        "operationId": "MaintenanceController_getMaintenanceById_v1",
+        "summary": "Get a specific maintenance event by ID",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          { "name": "maintenanceId", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Maintenance event details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MaintenanceItem" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/updates": {
+      "get": {
+        "operationId": "StatusUpdateController_getStatusUpdates_v1",
+        "summary": "Get status updates for a status page",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "integer", "default": 20 }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": { "type": "integer", "default": 1 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated feed of incident and maintenance updates",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusUpdatesResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status-pages/{id}/subscriptions": {
+      "post": {
+        "operationId": "SubscriptionController_createSubscription_v1",
+        "summary": "Subscribe to status page notifications",
+        "tags": ["subscriptions"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateSubscriptionDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/api/v1/subscriptions/verifications": {
+      "post": {
+        "operationId": "SubscriptionController_verifyToken_v1",
+        "summary": "Verify subscription token",
+        "tags": ["subscriptions"],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TokenDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/api/v1/subscriptions/confirmations": {
+      "post": {
+        "operationId": "SubscriptionController_confirmSubscription_v1",
+        "summary": "Confirm subscription",
+        "tags": ["subscriptions"],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TokenDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/api/v1/organizations/{orgId}/subscription/usage": {
+      "get": {
+        "operationId": "SubscriptionController_getUsage_v1",
+        "summary": "Get subscription usage for an organization",
+        "tags": ["subscriptions"],
+        "security": [{ "bearer": [] }],
+        "parameters": [
+          { "name": "orgId", "required": true, "in": "path", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription usage",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SubscriptionUsageResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subscriptions/unsubscribe": {
+      "post": {
+        "operationId": "SubscriptionController_unsubscribe_v1",
+        "summary": "Unsubscribe from status page notifications",
+        "tags": ["subscriptions"],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UnsubscribeDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } }
+      }
+    },
+    "/api/v1/status-pages/{id}/badge": {
+      "get": {
+        "operationId": "BadgeController_getBadge_v1",
+        "summary": "Get badge data for a status page",
+        "tags": ["status-pages"],
+        "parameters": [
+          { "name": "id", "required": true, "in": "path", "schema": { "type": "string" } },
+          {
+            "name": "preview",
+            "required": false,
+            "in": "query",
+            "description": "Force a specific status for preview purposes",
+            "schema": { "type": "string", "enum": ["operational", "unavailable", "investigation"] }
+          },
+          {
+            "name": "textOperational",
+            "required": false,
+            "in": "query",
+            "description": "Custom label for operational status",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "textUnavailable",
+            "required": false,
+            "in": "query",
+            "description": "Custom label for unavailable status",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "textInvestigation",
+            "required": false,
+            "in": "query",
+            "description": "Custom label for investigation status",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Badge data",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BadgeResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" }
+    },
+    "schemas": {
+      "StatusPageResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "domain": { "type": "string" },
+          "customDomain": { "type": "string", "nullable": true },
+          "customDomainVerified": { "type": "boolean" },
+          "visibility": { "type": "string", "enum": ["public", "private"] },
+          "organizationId": { "type": "string" },
+          "userId": { "type": "string" },
+          "description": { "type": "string", "nullable": true },
+          "logoUrl": { "type": "string", "nullable": true },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "accessStatus": {
+            "type": "string",
+            "enum": ["allowed", "not_found", "auth_required", "access_denied"]
+          }
+        },
+        "required": ["id", "name", "domain", "visibility", "organizationId", "userId", "createdAt", "updatedAt", "accessStatus"]
+      },
+      "ActiveIncident": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "status": { "type": "string" },
+          "severity": { "type": "string" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["id", "title", "status", "severity", "updatedAt"]
+      },
+      "StatusPageStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["operational", "degraded", "major_outage", "unknown"]
+          },
+          "message": { "type": "string" },
+          "activeIncident": {
+            "nullable": true,
+            "allOf": [{ "$ref": "#/components/schemas/ActiveIncident" }]
+          }
+        },
+        "required": ["status", "message", "activeIncident"]
+      },
+      "CustomizationResponse": {
+        "type": "object",
+        "nullable": true,
+        "properties": {
+          "id": { "type": "string" },
+          "statusPageId": { "type": "string" },
+          "primaryColor": { "type": "string", "nullable": true },
+          "accentColor": { "type": "string", "nullable": true },
+          "backgroundColor": { "type": "string", "nullable": true },
+          "foregroundColor": { "type": "string", "nullable": true },
+          "primaryForegroundColor": { "type": "string", "nullable": true },
+          "cardColor": { "type": "string", "nullable": true },
+          "cardForegroundColor": { "type": "string", "nullable": true },
+          "mutedColor": { "type": "string", "nullable": true },
+          "mutedForegroundColor": { "type": "string", "nullable": true },
+          "borderColor": { "type": "string", "nullable": true },
+          "textColor": { "type": "string", "nullable": true },
+          "useDarkTheme": { "type": "boolean" },
+          "shadowStyle": { "type": "string" },
+          "borderRadiusStyle": { "type": "string" },
+          "showSubscriptionButton": { "type": "boolean" },
+          "showRecentUpdatesSection": { "type": "boolean" },
+          "defaultLanguage": { "type": "string", "nullable": true },
+          "headerDisplayName": { "type": "string", "nullable": true },
+          "hideHeaderName": { "type": "boolean" },
+          "customCss": { "type": "string", "nullable": true },
+          "customHeaderHtml": { "type": "string", "nullable": true },
+          "customFooterHtml": { "type": "string", "nullable": true },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["id", "statusPageId", "useDarkTheme", "shadowStyle", "borderRadiusStyle", "showSubscriptionButton", "showRecentUpdatesSection", "hideHeaderName", "createdAt", "updatedAt"]
+      },
+      "MonitorSummary": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string" }
+        },
+        "required": ["id", "name", "status"]
+      },
+      "StatusHistoryItem": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["Operational", "Downtime", "Degraded", "None"]
+          },
+          "timestamp": { "type": "string" },
+          "tooltip": { "type": "string" },
+          "uptimePercentage": { "type": "number" },
+          "upCount": { "type": "integer" },
+          "downCount": { "type": "integer" }
+        },
+        "required": ["status", "timestamp"]
+      },
+      "MonitorNode": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["monitor"] },
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "groupId": { "type": "string", "nullable": true },
+          "sortOrder": { "type": "integer" },
+          "uptimePercentage": { "type": "string" },
+          "currentStatus": {
+            "type": "string",
+            "enum": ["Operational", "Downtime", "Degraded"]
+          },
+          "statusHistory": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/StatusHistoryItem" }
+          },
+          "lastChecked": { "type": "string" },
+          "updateInterval": { "type": "integer" },
+          "defaultOpen": { "type": "boolean" },
+          "supportsDayDetails": { "type": "boolean" }
+        },
+        "required": ["type", "id", "name", "sortOrder", "uptimePercentage", "currentStatus", "statusHistory", "lastChecked", "updateInterval", "defaultOpen"]
+      },
+      "StaticComponentNode": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["static-component"] },
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "groupId": { "type": "string", "nullable": true },
+          "sortOrder": { "type": "integer" },
+          "description": { "type": "string", "nullable": true },
+          "startDate": { "type": "string" },
+          "displayUptime": { "type": "boolean" },
+          "currentStatus": {
+            "type": "string",
+            "enum": ["Operational", "Downtime", "Degraded", "empty"]
+          },
+          "statusHistory": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/StatusHistoryItem" }
+          }
+        },
+        "required": ["type", "id", "name", "sortOrder", "startDate", "displayUptime", "currentStatus", "statusHistory"]
+      },
+      "GroupNode": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["group"] },
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "sortOrder": { "type": "integer" },
+          "aggregateStatus": {
+            "type": "string",
+            "enum": ["Operational", "Downtime", "Degraded", "empty"]
+          },
+          "children": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ComponentTreeItem" }
+          }
+        },
+        "required": ["type", "id", "name", "sortOrder", "aggregateStatus", "children"]
+      },
+      "ComponentTreeItem": {
+        "oneOf": [
+          { "$ref": "#/components/schemas/MonitorNode" },
+          { "$ref": "#/components/schemas/StaticComponentNode" },
+          { "$ref": "#/components/schemas/GroupNode" }
+        ],
+        "discriminator": { "propertyName": "type" }
+      },
+      "AggregationRegion": {
+        "type": "object",
+        "properties": {
+          "region": { "type": "string" },
+          "upCount": { "type": "integer" },
+          "downCount": { "type": "integer" },
+          "avgResponseTime": { "type": "number", "nullable": true }
+        },
+        "required": ["region", "upCount", "downCount", "avgResponseTime"]
+      },
+      "AggregationHour": {
+        "type": "object",
+        "properties": {
+          "hour": { "type": "integer", "description": "Hour of day (0–23)" },
+          "regions": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AggregationRegion" }
+          }
+        },
+        "required": ["hour", "regions"]
+      },
+      "IncidentUpdate": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "incidentId": { "type": "string" },
+          "content": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["investigating", "identified", "monitoring", "resolved"]
+          },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["id", "incidentId", "content", "status", "createdAt", "updatedAt"]
+      },
+      "IncidentItem": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "statusPageId": { "type": "string" },
+          "organizationId": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string", "nullable": true },
+          "severity": { "type": "string", "enum": ["minor", "major", "critical"] },
+          "status": {
+            "type": "string",
+            "enum": ["investigating", "identified", "monitoring", "resolved"]
+          },
+          "monitorId": { "type": "string", "nullable": true },
+          "startedAt": { "type": "string", "format": "date-time" },
+          "resolvedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "updates": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/IncidentUpdate" }
+          },
+          "affectedMonitors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": { "id": { "type": "string" } },
+              "required": ["id"]
+            }
+          }
+        },
+        "required": ["id", "statusPageId", "organizationId", "title", "severity", "status", "startedAt", "createdAt", "updatedAt", "updates", "affectedMonitors"]
+      },
+      "IncidentListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/IncidentItem" }
+          },
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" },
+          "total": { "type": "integer" },
+          "hasMore": { "type": "boolean" }
+        },
+        "required": ["items", "page", "limit", "total", "hasMore"]
+      },
+      "MaintenanceUpdate": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "maintenanceId": { "type": "string" },
+          "content": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["scheduled", "in_progress", "completed", "cancelled"]
+          },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["id", "maintenanceId", "content", "status", "createdAt", "updatedAt"]
+      },
+      "MaintenanceItem": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "statusPageId": { "type": "string" },
+          "organizationId": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string", "nullable": true },
+          "status": {
+            "type": "string",
+            "enum": ["scheduled", "in_progress", "completed", "cancelled"]
+          },
+          "scheduledStartAt": { "type": "string", "format": "date-time" },
+          "scheduledEndAt": { "type": "string", "format": "date-time" },
+          "actualStartAt": { "type": "string", "format": "date-time", "nullable": true },
+          "actualEndAt": { "type": "string", "format": "date-time", "nullable": true },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "updates": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/MaintenanceUpdate" }
+          }
+        },
+        "required": ["id", "statusPageId", "organizationId", "title", "status", "scheduledStartAt", "scheduledEndAt", "createdAt", "updatedAt", "updates"]
+      },
+      "MaintenanceListResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/MaintenanceItem" }
+          },
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" },
+          "total": { "type": "integer" },
+          "hasMore": { "type": "boolean" }
+        },
+        "required": ["items", "page", "limit", "total", "hasMore"]
+      },
+      "IncidentUpdateFeedItem": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["incident"] },
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string", "nullable": true },
+          "severity": { "type": "string" },
+          "status": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "resolvedAt": { "type": "string", "format": "date-time", "nullable": true },
+          "affectedMonitors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": { "id": { "type": "string" } },
+              "required": ["id"]
+            }
+          },
+          "updates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "content": { "type": "string" },
+                "status": { "type": "string" },
+                "createdAt": { "type": "string", "format": "date-time" }
+              },
+              "required": ["id", "content", "status", "createdAt"]
+            }
+          }
+        },
+        "required": ["type", "id", "title", "severity", "status", "createdAt", "updatedAt", "affectedMonitors", "updates"]
+      },
+      "MaintenanceUpdateFeedItem": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["maintenance"] },
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string", "nullable": true },
+          "status": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "scheduledStartAt": { "type": "string", "format": "date-time" },
+          "scheduledEndAt": { "type": "string", "format": "date-time" },
+          "actualStartAt": { "type": "string", "format": "date-time", "nullable": true },
+          "actualEndAt": { "type": "string", "format": "date-time", "nullable": true },
+          "updates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "content": { "type": "string" },
+                "status": { "type": "string" },
+                "createdAt": { "type": "string", "format": "date-time" }
+              },
+              "required": ["id", "content", "status", "createdAt"]
+            }
+          }
+        },
+        "required": ["type", "id", "title", "status", "createdAt", "scheduledStartAt", "scheduledEndAt", "updates"]
+      },
+      "StatusUpdatesFeedItem": {
+        "oneOf": [
+          { "$ref": "#/components/schemas/IncidentUpdateFeedItem" },
+          { "$ref": "#/components/schemas/MaintenanceUpdateFeedItem" }
+        ],
+        "discriminator": { "propertyName": "type" }
+      },
+      "StatusUpdatesResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/StatusUpdatesFeedItem" }
+          },
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" },
+          "total": { "type": "integer" },
+          "hasMore": { "type": "boolean" }
+        },
+        "required": ["items", "page", "limit", "total", "hasMore"]
+      },
+      "BadgeResponse": {
+        "type": "object",
+        "properties": {
+          "statusPageId": { "type": "string" },
+          "statusPageName": { "type": "string" },
+          "visibility": { "type": "string", "enum": ["public", "private"] },
+          "status": { "type": "string", "enum": ["operational", "unavailable", "investigation"] },
+          "uptimePercentage": { "type": "number" },
+          "text": { "type": "string" }
+        },
+        "required": ["statusPageId", "statusPageName", "visibility", "status", "uptimePercentage", "text"]
+      },
+      "SubscriptionUsageResponse": {
+        "type": "object",
+        "properties": {
+          "plan": { "type": "string", "nullable": true },
+          "status": { "type": "string", "nullable": true },
+          "activeMonitorsCount": { "type": "integer" },
+          "totalMonitorsCount": { "type": "integer" },
+          "statusPagesCount": { "type": "integer" },
+          "totalNotificationsSent": { "type": "integer" },
+          "totalHeartbeats": { "type": "integer" }
+        },
+        "required": ["activeMonitorsCount", "totalMonitorsCount", "statusPagesCount", "totalNotificationsSent", "totalHeartbeats"]
+      },
+      "UpdateStatusPageDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "example": "My Status Page" },
+          "description": { "type": "string" },
+          "logoUrl": { "type": "string" },
+          "visibility": { "type": "string", "enum": ["public", "private"] }
+        }
+      },
+      "UpdateCustomizationDto": {
+        "type": "object",
+        "properties": {
+          "primaryColor": { "type": "string" },
+          "accentColor": { "type": "string" },
+          "backgroundColor": { "type": "string" },
+          "foregroundColor": { "type": "string" },
+          "primaryForegroundColor": { "type": "string" },
+          "cardColor": { "type": "string" },
+          "cardForegroundColor": { "type": "string" },
+          "mutedColor": { "type": "string" },
+          "mutedForegroundColor": { "type": "string" },
+          "borderColor": { "type": "string" },
+          "textColor": { "type": "string" },
+          "useDarkTheme": { "type": "boolean" },
+          "showSubscriptionButton": { "type": "boolean" },
+          "showRecentUpdatesSection": { "type": "boolean" },
+          "hideHeaderName": { "type": "boolean" },
+          "shadowStyle": { "type": "string" },
+          "borderRadiusStyle": { "type": "string" },
+          "defaultLanguage": { "type": "string" },
+          "headerDisplayName": { "type": "string" },
+          "customCss": { "type": "string" },
+          "customHeaderHtml": { "type": "string" },
+          "customFooterHtml": { "type": "string" }
+        }
+      },
+      "CreateSubscriptionDto": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "description": "Email address for notifications" },
+          "slackWebhookUrl": { "type": "string", "description": "Slack webhook URL" },
+          "subscriptionType": { "type": "string", "enum": ["all", "specific"] },
+          "monitorIds": {
+            "description": "Monitor IDs for specific subscriptions",
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["subscriptionType"]
+      },
+      "TokenDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Confirmation token received via email",
+            "example": "uuid-v4-token"
+          }
+        },
+        "required": ["token"]
+      },
+      "UnsubscribeDto": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string", "description": "Unsubscribe token received via email" }
+        },
+        "required": ["token"]
+      }
+    }
+  }
+}
