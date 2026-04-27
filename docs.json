@@ -2,6 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "GetMonitor",
+  "openapi": "api-reference/openapi.json",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -55,6 +56,34 @@
           {
             "group": "Organization",
             "pages": ["organization/team-members", "organization/settings"]
+          }
+        ]
+      },
+      {
+        "tab": "API",
+        "groups": [
+          {
+            "group": "Status Pages",
+            "pages": [
+              "api-reference/status-pages/get-status-page",
+              "api-reference/status-pages/get-status",
+              "api-reference/status-pages/get-customization",
+              "api-reference/status-pages/get-monitors",
+              "api-reference/status-pages/get-components",
+              "api-reference/status-pages/get-monitor-aggregations",
+              "api-reference/status-pages/get-incidents",
+              "api-reference/status-pages/get-incident",
+              "api-reference/status-pages/get-maintenance",
+              "api-reference/status-pages/get-maintenance-event",
+              "api-reference/status-pages/get-status-updates",
+              "api-reference/status-pages/get-badge"
+            ]
+          },
+          {
+            "group": "Subscriptions",
+            "pages": [
+              "api-reference/subscriptions/get-usage"
+            ]
           }
         ]
       }
